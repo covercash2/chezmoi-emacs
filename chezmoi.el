@@ -35,16 +35,29 @@ FILE points to the destination file."
 (defun chezmoi-apply ()
   "Apply chezmoi config."
   (interactive)
-  (start-process "chezmoi apply"
-		 chezmoi-output-buffer-name
-		 "chezmoi" "apply" "--verbose"))
+  ; set process callback
+  (set-process-sentinel
+   (start-process "chezmoi apply"
+		  chezmoi-output-buffer-name
+		  "chezmoi" "apply" "--verbose")
+   'chezmoi-apply-sentinel))
 
 (defun chezmoi-apply-dry-run ()
   "Show configuration changes in the chezmoi output buffer."
   (interactive)
-  (start-process "chezmoi apply dry run"
-		 chezmoi-output-buffer-name
-		 "chezmoi" "apply" "--dry-run" "--verbose"))
+  (set-process-sentinel
+   (start-process "chezmoi apply dry run"
+		  chezmoi-output-buffer-name
+		  "chezmoi" "apply" "--dry-run" "--verbose")
+   'chezmoi-apply-sentinel))
+
+(defun chezmoi-apply-sentinel (process event)
+  "Sentinal for chezmoi apply PROCESS to handle EVENTs."
+  (cond
+   ((string= event "finished\n")
+    (message "chezmoi apply finished. check %s for more info"
+	     chezmoi-output-buffer-name))
+   (t nil)))
 
 (provide 'chezmoi)
 ;;; chezmoi.el ends here
