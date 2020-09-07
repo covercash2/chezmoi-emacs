@@ -1,9 +1,9 @@
 #+TITLE: chezmoi emacs
 
-a simple chezmoi interface for emacs
+a simple [[https://github.com/twpayne/chezmoi][chezmoi]]  interface for emacs
 
-*** examples
-*** * edit config files
+** examples
+***  edit config files
 #+BEGIN_SRC elisp
 (chezmoi-edit "~/.bashrc")
 #+END_SRC

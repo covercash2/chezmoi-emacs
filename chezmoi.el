@@ -5,6 +5,27 @@
 
 (defconst chezmoi-output-buffer-name "*chezmoi output*")
 
+(defun chezmoi-source-path (file)
+  "Get the path to the source for configuration file FILE."
+  (interactive "fConfig file: ")
+  (let ((chezmoi-file
+	 (string-trim
+	 (shell-command-to-string
+	  (concat "chezmoi source-path " file)))))
+    (cond ((file-exists-p chezmoi-file)
+	   (progn
+	     (when (called-interactively-p 'any)
+		 (message (concat "chezmoi source file: " chezmoi-file)))
+	     chezmoi-file
+	     ))
+	  (t (error "Unable to find config file: %s\n %s" file chezmoi-file))
+	  )
+    )
+  )
+
+(defun print-chezmoi-source-path ()
+  (message (chezmoi-source-path "~/.config")))
+
 (defun chezmoi-edit (file)
   "Edit a file managed by chezmoi.
 This function should work just like `chezmoi edit'
