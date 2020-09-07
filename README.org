@@ -1,0 +1,15 @@
+#+TITLE: chezmoi emacs
+
+a simple chezmoi interface for emacs
+
+*** examples
+*** * edit config files
+#+BEGIN_SRC elisp
+(chezmoi-edit "~/.bashrc")
+#+END_SRC
+*** apply config
+#+BEGIN_SRC elisp
+(chezmoi-apply-dry-run)
+(chezmoi-apply)
+#+END_SRC
+
