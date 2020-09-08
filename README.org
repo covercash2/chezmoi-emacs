@@ -12,4 +12,8 @@ a simple [[https://github.com/twpayne/chezmoi][chezmoi]]  interface for emacs
 (chezmoi-apply-dry-run)
 (chezmoi-apply)
 #+END_SRC
+*** view diff
+#+BEGIN_SRC elisp
+(chezmoi-diff)
+#+END_SRC
 
