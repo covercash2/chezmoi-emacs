@@ -1,5 +1,11 @@
 ;;; chezmoi.el --- chezmoi management
 ;;; Commentary:
+;;; In this file "source" is used to describe files
+;;; that exist in the chezmoi repo.
+;;; By contrast, "destination" describes the
+;;; location where the file should be placed after editing,
+;;; e.g. source: $(chezmoi source-path)/dot_profile
+;;; destination: ~/.profile
 ;;; Some simple commands for working with chezmoi.
 ;;; Code:
 
