@@ -45,9 +45,9 @@ state for TARGETS."
   (interactive)
   (set-process-sentinel
    (start-process "chezmoi diff"
-		  (chezmoi-diff-get-buffer-create)
+		  (chezmoi--diff-get-buffer-create)
 		  "chezmoi" "diff" "--no-pager")
-   'chezmoi-diff-sentinel)
+   'chezmoi--diff-sentinel)
   )
 
 (defun chezmoi-apply ()
@@ -77,14 +77,14 @@ state for TARGETS."
 	     chezmoi-output-buffer-name))
    (t nil)))
 
-(defun chezmoi-diff-sentinel (process event)
+(defun chezmoi--diff-sentinel (process event)
   "Sentinal for opening the diff buffer when PROCESS receives a finished EVENT."
   (cond
    ((string= event "finished\n")
-    (switch-to-buffer (chezmoi-diff-get-buffer-create)))
+    (switch-to-buffer (chezmoi--diff-get-buffer-create)))
    (t nil)))
 
-(defun chezmoi-diff-get-buffer-create ()
+(defun chezmoi--diff-get-buffer-create ()
   "Get configured diff buffer.
 The name is meant to reflect the behavior of =get-buffer-create=.
 If the buffer has not been created, sets major mode, etc."
