@@ -69,8 +69,8 @@ state for TARGETS."
 		  "chezmoi" "apply" "--dry-run" "--verbose")
    'chezmoi-apply-sentinel))
 
-(defun chezmoi-apply-sentinel (process event)
-  "Sentinal for chezmoi apply PROCESS to handle EVENTs."
+(defun chezmoi--apply-sentinel (process event)
+  "Sentinel for chezmoi apply PROCESS to handle EVENTs."
   (cond
    ((string= event "finished\n")
     (message "chezmoi apply finished. check %s for more info"
@@ -78,7 +78,7 @@ state for TARGETS."
    (t nil)))
 
 (defun chezmoi--diff-sentinel (process event)
-  "Sentinal for opening the diff buffer when PROCESS receives a finished EVENT."
+  "Sentinel for opening the diff buffer when PROCESS receives a finished EVENT."
   (cond
    ((string= event "finished\n")
     (switch-to-buffer (chezmoi--diff-get-buffer-create)))
